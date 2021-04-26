@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+
+{% block content %}
+<meta charset="UTF-8">
+<h2 align="center">Devices</h2>
+{% for object in objects %}
+<h3>Device №{{ object.id }}</h3>
+<div class="table_container">
+    <table class="my_table">
+        <tr class="my_row">
+            <td class="title" width="400px" bgcolor="#dddddd">Устройство</td>
+            <td class="title" width="150px" bgcolor="#dddddd">Владелец</td>
+            <td class="title" width="100px" bgcolor="#dddddd" align="center">Пользователи</td>
+            <td class="title" width="200px" bgcolor="#dddddd" align="center">Статус</td>
+            <td class="title" width="100px" bgcolor="#dddddd" align="center">Сейчас работает</td>
+            <td class="title" width="100px" bgcolor="#dddddd" align="center">Изменить статус</td>
+        </tr>
+        <tr class="my_row">
+            <td class="ordinary" bgcolor="#eeeeff">{{ object.device.capitalize() }}</td>
+            <td class="ordinary" bgcolor="#eeeeff" align="center">{{ object.creator }}</td>
+            <td class="ordinary" bgcolor="#eeeeff" align="center">{{ object.users }}</td>
+            {% if object.status == "properly" %}
+            <td class="ordinary" bgcolor="#cfffcf" align="center">Working properly</td>
+            {% elif object.status == "warning" %}
+            <td class="ordinary" bgcolor="#ffff85" align="center">There is a problem</td>
+            {% else %}
+            <td class="ordinary" bgcolor="#fa5555" align="center">Critical error!</td>
+            {% endif %}
+            {% if object.is_working %}
+            <td class="ordinary" bgcolor="#9fff8a" align="center">{{ object.is_working }}</td>
+            {% else %}
+            <td class="ordinary" bgcolor="#ff8a8e" align="center">{{ object.is_working }}</td>
+            {% endif %}
+            <td class="btn btn-primary " href="/addobject">Изменить</td>
+        </tr>
+
+    </table>
+</div>
+<br>
+{% endfor %}
+
+{% endblock %}
